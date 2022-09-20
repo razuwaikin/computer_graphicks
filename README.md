@@ -1,4 +1,5 @@
 # computer_graphicks
+<input type=text"
 ДЗ 1
 <!DOCTYPE html>
 <html lang="en">
