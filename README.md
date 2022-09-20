@@ -1,6 +1,7 @@
 # computer_graphicks
 <input type=text"
 ДЗ 1
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,10 +52,10 @@
     var cy=h/2;
     var cz=0;
   
-  if ((h/6) > (w/6)){
-    size = w/6;}
-  else{
-    size = h/6;}
+   if ((h/6) > (w/6)){
+       size = w/6;}
+   else{
+       size = h/6;}
  
    var verticies=[
      new POINT3D(cx-size, cy+size, cz-size),//0
@@ -98,7 +99,7 @@
     // set up the animation loop
     var timeDelta, timeLast = 0;
     requestAnimationFrame(loop1);
-   // requestAnimationFrame(loop2);
+    // requestAnimationFrame(loop2);
   
 
     function loop1(timeNow) {
@@ -144,7 +145,7 @@
         }
 
         // draw each edge
-      //cube
+        //cube
         ctx.beginPath();
         ctx.strokeStyle = COLOUR_cube;
         for (let edge1 of edges) {
@@ -191,5 +192,6 @@
     </script>
   </body>
 </html>
-
+```
+                       
 Дз2
