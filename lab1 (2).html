@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+      body, html {
+        min-width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        font: Arial 14px;
+      }
+    </style>
+    <!--<link rel="stylesheet" href="style.css"/>-->
+    <!--<script defer src="script.js"></script>-->
+  </head>
+  <body>
+    <script>
+    //contex and canvas 
+    var flag=0;
+	var canvas =document.createElement("canvas");
+    document.body.appendChild(canvas) ;
+    var ctx  = canvas.getContext("2d");
+    //var ctx2 = canvas.getContext("2d");
+    
+    //dimensions
+    var w = document.documentElement.clientWidth;
+    var h = document.documentElement.clientHeight;
+    canvas.height = h;
+    canvas.width = w;
+
+    //colours and lines
+    ctx.fillStyle = "black";
+    ctx.lineWidth= w/50;
+    ctx.lineCap="round";
+  
+    //cube parameters
+    var cx=w/2;
+    var cy=h/2;
+    var cz=0;
+  
+  if ((h/6) > (w/6)){
+    size = w/6;}
+  else{
+    size = h/6;}
+      
+      
+      var x_=0;
+      var y_=0;
+      
+      function draw(x_,y_) {
+      //counterfeint 
+      //y
+      ctx.beginPath();
+      ctx.fillStyle="black";
+      ctx.fillRect(cx-2*size,cy-2*size, size/50,size*4);
+      ctx.fillRect(cx,cy-2*size, size/50,4*size);
+	  ctx.fillRect(cx+2*size, cy-2*size,size/50,4*size);
+	  ctx.fillRect(cx-size,cy-2*size, size/50,size*4);
+	  ctx.fillRect(cx+size, cy-2*size,size/50,4*size);
+      
+      //x
+      ctx.fillRect(cx-2*size,cy,4*size,size/50);
+      ctx.fillRect(cx-2*size,cy+2*size,4*size,size/50);
+      ctx.fillRect(cx-2*size,cy-2*size,4*size,size/50);
+	  ctx.fillRect(cx-2*size,cy-size,4*size,size/50);
+      ctx.fillRect(cx-2*size,cy+size,4*size,size/50);
+
+      
+      //upppp
+      ctx.fillRect(cx-size/2,size/2,size,size/2-size);
+      //downnnn
+      ctx.fillRect(cx-size/2,h-size/2,size,size/2);
+      //rightttt
+      ctx.fillRect(w-size/2,cy+size/2,size,-size);
+      //leftttt
+      ctx.fillRect(-size/2,cy+size/2,size,-size);
+       
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.fillStyle="gold";
+      //hero
+      ctx.fillRect(cx-size/4+x_,cy-size/4+y_,size/2,size/2);
+      ctx.closePath(); 
+      }
+      
+      draw(0,0);
+      var xx=0;
+      var yy=0;
+      document.addEventListener("click",function(event){
+          if (event.which==1){
+            xx=event.offsetX;
+            yy=event.offsetY;
+            //right
+              if((xx>=w-size)&(yy<cy+size)&(yy>cy-size)){
+				  if (x_<=size){
+                  x_+=size;}
+				  }
+            //left
+              if((xx< size/2)&(yy<cy+size)&(yy>cy-size)){
+			  	  if (x_>=-size){
+                  x_-=size;}
+				  }
+            //up
+              if((xx>cx-size/2)&(xx<cx+size/2)&(yy<size/2)){
+               	  if (y_>=-size){
+				  y_-=size;}
+				  }
+            //down
+              if((xx>cx-size/2)&(xx<cx+size/2)&(yy>h-size/2)){
+              	  if (y_<=size){
+				  y_+=size;}
+				  }      
+            ctx.clearRect(0,0,w,h);
+            draw(x_,y_);
+			flag=1;
+          }
+
+}) 
+      
+      document.addEventListener("keydown", function(event) {
+			if (event.code == "ArrowRight"){
+				console.log("right");
+				x_+=size;
+			} else if (event.code == "ArrowLeft"){
+                console.log("left");
+				x_-=size;
+			} else if (event.code == "ArrowUp"){
+				console.log("up");
+                y_-=size;
+            } else if (event.code =="ArrowDown"){
+                console.log("down");
+				y_+=size;
+            }
+            ctx.clearRect(0,0,w,h);
+            draw(x_,y_);
+			flag=1;
+		});
+		
+      setInterval( function () {
+			if (flag==1){
+			ctx.beginPath();
+			ctx.clearRect(0, 0, w, h);
+			ctx.fillStyle = "cyan";	
+			ctx.fillRect(0,0, w, h);
+			ctx.closePath();
+			console.log("sleep");
+			}
+		}, 10000);
+		
+    </script>
+  </body>
+</html>
